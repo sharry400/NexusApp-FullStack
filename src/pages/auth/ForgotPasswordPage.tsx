@@ -9,13 +9,13 @@ export const ForgotPasswordPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  
+
   const { forgotPassword } = useAuth();
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     try {
       await forgotPassword(email);
       setIsSubmitted(true);
@@ -25,7 +25,7 @@ export const ForgotPasswordPage: React.FC = () => {
       setIsLoading(false);
     }
   };
-  
+
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -39,13 +39,13 @@ export const ForgotPasswordPage: React.FC = () => {
               We've sent password reset instructions to {email}
             </p>
           </div>
-          
+
           <div className="mt-8 bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <div className="space-y-4">
               <p className="text-sm text-gray-500">
                 Didn't receive the email? Check your spam folder or try again.
               </p>
-              
+
               <Button
                 variant="outline"
                 fullWidth
@@ -53,7 +53,7 @@ export const ForgotPasswordPage: React.FC = () => {
               >
                 Try again
               </Button>
-              
+
               <Link to="/login">
                 <Button
                   variant="ghost"
@@ -69,7 +69,7 @@ export const ForgotPasswordPage: React.FC = () => {
       </div>
     );
   }
-  
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -82,7 +82,7 @@ export const ForgotPasswordPage: React.FC = () => {
             Enter your email address and we'll send you instructions to reset your password.
           </p>
         </div>
-        
+
         <div className="mt-8 bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <Input
@@ -94,7 +94,7 @@ export const ForgotPasswordPage: React.FC = () => {
               fullWidth
               startAdornment={<Mail size={18} />}
             />
-            
+
             <Button
               type="submit"
               fullWidth
@@ -102,7 +102,7 @@ export const ForgotPasswordPage: React.FC = () => {
             >
               Send reset instructions
             </Button>
-            
+
             <Link to="/login">
               <Button
                 variant="ghost"

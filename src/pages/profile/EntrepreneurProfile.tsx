@@ -13,10 +13,9 @@ import { Entrepreneur } from '../../types';
 export const EntrepreneurProfile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { user: currentUser } = useAuth();
-  
-  // Fetch entrepreneur data
+
   const entrepreneur = findUserById(id || '') as Entrepreneur | null;
-  
+
   if (!entrepreneur || entrepreneur.role !== 'entrepreneur') {
     return (
       <div className="text-center py-12">
@@ -28,15 +27,14 @@ export const EntrepreneurProfile: React.FC = () => {
       </div>
     );
   }
-  
+
   const isCurrentUser = currentUser?.id === entrepreneur.id;
   const isInvestor = currentUser?.role === 'investor';
-  
-  // Check if the current investor has already sent a request to this entrepreneur
-  const hasRequestedCollaboration = isInvestor && id 
+
+  const hasRequestedCollaboration = isInvestor && id
     ? getRequestsFromInvestor(currentUser.id).some(req => req.entrepreneurId === id)
     : false;
-  
+
   const handleSendRequest = () => {
     if (isInvestor && currentUser && id) {
       createCollaborationRequest(
@@ -44,16 +42,14 @@ export const EntrepreneurProfile: React.FC = () => {
         id,
         `I'm interested in learning more about ${entrepreneur.startupName} and would like to explore potential investment opportunities.`
       );
-      
-      // In a real app, we would refresh the data or update state
-      // For this demo, we'll force a page reload
+
       window.location.reload();
     }
   };
-  
+
   return (
     <div className="space-y-6 animate-fade-in">
-      {/* Profile header */}
+
       <Card>
         <CardBody className="sm:flex sm:items-start sm:justify-between p-6">
           <div className="sm:flex sm:space-x-6">
@@ -64,14 +60,14 @@ export const EntrepreneurProfile: React.FC = () => {
               status={entrepreneur.isOnline ? 'online' : 'offline'}
               className="mx-auto sm:mx-0"
             />
-            
+
             <div className="mt-4 sm:mt-0 text-center sm:text-left">
               <h1 className="text-2xl font-bold text-gray-900">{entrepreneur.name}</h1>
               <p className="text-gray-600 flex items-center justify-center sm:justify-start mt-1">
                 <Building2 size={16} className="mr-1" />
                 Founder at {entrepreneur.startupName}
               </p>
-              
+
               <div className="flex flex-wrap gap-2 justify-center sm:justify-start mt-3">
                 <Badge variant="primary">{entrepreneur.industry}</Badge>
                 <Badge variant="gray">
@@ -89,7 +85,7 @@ export const EntrepreneurProfile: React.FC = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="mt-6 sm:mt-0 flex flex-col sm:flex-row gap-2 justify-center sm:justify-end">
             {!isCurrentUser && (
               <>
@@ -101,7 +97,7 @@ export const EntrepreneurProfile: React.FC = () => {
                     Message
                   </Button>
                 </Link>
-                
+
                 {isInvestor && (
                   <Button
                     leftIcon={<Send size={18} />}
@@ -113,7 +109,7 @@ export const EntrepreneurProfile: React.FC = () => {
                 )}
               </>
             )}
-            
+
             {isCurrentUser && (
               <Button
                 variant="outline"
@@ -125,11 +121,11 @@ export const EntrepreneurProfile: React.FC = () => {
           </div>
         </CardBody>
       </Card>
-      
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Main content - left side */}
+
         <div className="lg:col-span-2 space-y-6">
-          {/* About */}
+
           <Card>
             <CardHeader>
               <h2 className="text-lg font-medium text-gray-900">About</h2>
@@ -138,8 +134,7 @@ export const EntrepreneurProfile: React.FC = () => {
               <p className="text-gray-700">{entrepreneur.bio}</p>
             </CardBody>
           </Card>
-          
-          {/* Startup Description */}
+
           <Card>
             <CardHeader>
               <h2 className="text-lg font-medium text-gray-900">Startup Overview</h2>
@@ -152,21 +147,21 @@ export const EntrepreneurProfile: React.FC = () => {
                     {entrepreneur?.pitchSummary?.split('.')[0]}.
                   </p>
                 </div>
-                
+
                 <div>
                   <h3 className="text-md font-medium text-gray-900">Solution</h3>
                   <p className="text-gray-700 mt-1">
                     {entrepreneur.pitchSummary}
                   </p>
                 </div>
-                
+
                 <div>
                   <h3 className="text-md font-medium text-gray-900">Market Opportunity</h3>
                   <p className="text-gray-700 mt-1">
                     The {entrepreneur.industry} market is experiencing significant growth, with a projected CAGR of 14.5% through 2027. Our solution addresses key pain points in this expanding market.
                   </p>
                 </div>
-                
+
                 <div>
                   <h3 className="text-md font-medium text-gray-900">Competitive Advantage</h3>
                   <p className="text-gray-700 mt-1">
@@ -176,8 +171,7 @@ export const EntrepreneurProfile: React.FC = () => {
               </div>
             </CardBody>
           </Card>
-          
-          {/* Team */}
+
           <Card>
             <CardHeader className="flex justify-between items-center">
               <h2 className="text-lg font-medium text-gray-900">Team</h2>
@@ -197,7 +191,7 @@ export const EntrepreneurProfile: React.FC = () => {
                     <p className="text-xs text-gray-500">Founder & CEO</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center p-3 border border-gray-200 rounded-md">
                   <Avatar
                     src="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg"
@@ -210,7 +204,7 @@ export const EntrepreneurProfile: React.FC = () => {
                     <p className="text-xs text-gray-500">CTO</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center p-3 border border-gray-200 rounded-md">
                   <Avatar
                     src="https://images.pexels.com/photos/773371/pexels-photo-773371.jpeg"
@@ -223,7 +217,7 @@ export const EntrepreneurProfile: React.FC = () => {
                     <p className="text-xs text-gray-500">Head of Product</p>
                   </div>
                 </div>
-                
+
                 {entrepreneur.teamSize > 3 && (
                   <div className="flex items-center justify-center p-3 border border-dashed border-gray-200 rounded-md">
                     <p className="text-sm text-gray-500">+ {entrepreneur.teamSize - 3} more team members</p>
@@ -233,10 +227,9 @@ export const EntrepreneurProfile: React.FC = () => {
             </CardBody>
           </Card>
         </div>
-        
-        {/* Sidebar - right side */}
+
         <div className="space-y-6">
-          {/* Funding Details */}
+
           <Card>
             <CardHeader>
               <h2 className="text-lg font-medium text-gray-900">Funding</h2>
@@ -250,17 +243,17 @@ export const EntrepreneurProfile: React.FC = () => {
                     <p className="text-lg font-semibold text-gray-900">{entrepreneur.fundingNeeded}</p>
                   </div>
                 </div>
-                
+
                 <div>
                   <span className="text-sm text-gray-500">Valuation</span>
                   <p className="text-md font-medium text-gray-900">$8M - $12M</p>
                 </div>
-                
+
                 <div>
                   <span className="text-sm text-gray-500">Previous Funding</span>
                   <p className="text-md font-medium text-gray-900">$750K Seed (2022)</p>
                 </div>
-                
+
                 <div className="pt-3 border-t border-gray-100">
                   <span className="text-sm text-gray-500">Funding Timeline</span>
                   <div className="mt-2 space-y-2">
@@ -281,8 +274,7 @@ export const EntrepreneurProfile: React.FC = () => {
               </div>
             </CardBody>
           </Card>
-          
-          {/* Documents */}
+
           <Card>
             <CardHeader>
               <h2 className="text-lg font-medium text-gray-900">Documents</h2>
@@ -299,7 +291,7 @@ export const EntrepreneurProfile: React.FC = () => {
                   </div>
                   <Button variant="outline" size="sm">View</Button>
                 </div>
-                
+
                 <div className="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors">
                   <div className="p-2 bg-primary-50 rounded-md mr-3">
                     <FileText size={18} className="text-primary-700" />
@@ -310,7 +302,7 @@ export const EntrepreneurProfile: React.FC = () => {
                   </div>
                   <Button variant="outline" size="sm">View</Button>
                 </div>
-                
+
                 <div className="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors">
                   <div className="p-2 bg-primary-50 rounded-md mr-3">
                     <FileText size={18} className="text-primary-700" />
@@ -322,13 +314,13 @@ export const EntrepreneurProfile: React.FC = () => {
                   <Button variant="outline" size="sm">View</Button>
                 </div>
               </div>
-              
+
               {!isCurrentUser && isInvestor && (
                 <div className="mt-4 pt-4 border-t border-gray-100">
                   <p className="text-sm text-gray-500">
                     Request access to detailed documents and financials by sending a collaboration request.
                   </p>
-                  
+
                   {!hasRequestedCollaboration ? (
                     <Button
                       className="mt-3 w-full"

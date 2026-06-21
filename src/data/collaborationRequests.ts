@@ -43,34 +43,30 @@ export const collaborationRequests: CollaborationRequest[] = [
   }
 ];
 
-// Helper function to get collaboration requests for an entrepreneur
 export const getRequestsForEntrepreneur = (entrepreneurId: string): CollaborationRequest[] => {
   return collaborationRequests
     .filter(request => request.entrepreneurId === entrepreneurId)
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 };
 
-// Helper function to get collaboration requests sent by an investor
 export const getRequestsFromInvestor = (investorId: string): CollaborationRequest[] => {
   return collaborationRequests
     .filter(request => request.investorId === investorId)
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 };
 
-// Helper function to update a collaboration request status
 export const updateRequestStatus = (requestId: string, newStatus: 'pending' | 'accepted' | 'rejected'): CollaborationRequest | null => {
   const requestIndex = collaborationRequests.findIndex(req => req.id === requestId);
   if (requestIndex === -1) return null;
-  
+
   collaborationRequests[requestIndex] = {
     ...collaborationRequests[requestIndex],
     status: newStatus
   };
-  
+
   return collaborationRequests[requestIndex];
 };
 
-// Helper function to create a new collaboration request
 export const createCollaborationRequest = (
   investorId: string,
   entrepreneurId: string,
@@ -84,7 +80,7 @@ export const createCollaborationRequest = (
     status: 'pending',
     createdAt: new Date().toISOString()
   };
-  
+
   collaborationRequests.push(newRequest);
   return newRequest;
 };

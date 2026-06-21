@@ -9,18 +9,18 @@ import { useAuth } from '../../context/AuthContext';
 
 export const SettingsPage: React.FC = () => {
   const { user } = useAuth();
-  
+
   if (!user) return null;
-  
+
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
         <p className="text-gray-600">Manage your account preferences and settings</p>
       </div>
-      
+
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* Settings navigation */}
+
         <Card className="lg:col-span-1">
           <CardBody className="p-2">
             <nav className="space-y-1">
@@ -28,27 +28,27 @@ export const SettingsPage: React.FC = () => {
                 <User size={18} className="mr-3" />
                 Profile
               </button>
-              
+
               <button className="flex items-center w-full px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-md">
                 <Lock size={18} className="mr-3" />
                 Security
               </button>
-              
+
               <button className="flex items-center w-full px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-md">
                 <Bell size={18} className="mr-3" />
                 Notifications
               </button>
-              
+
               <button className="flex items-center w-full px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-md">
                 <Globe size={18} className="mr-3" />
                 Language
               </button>
-              
+
               <button className="flex items-center w-full px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-md">
                 <Palette size={18} className="mr-3" />
                 Appearance
               </button>
-              
+
               <button className="flex items-center w-full px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-md">
                 <CreditCard size={18} className="mr-3" />
                 Billing
@@ -56,10 +56,9 @@ export const SettingsPage: React.FC = () => {
             </nav>
           </CardBody>
         </Card>
-        
-        {/* Main settings content */}
+
         <div className="lg:col-span-3 space-y-6">
-          {/* Profile Settings */}
+
           <Card>
             <CardHeader>
               <h2 className="text-lg font-medium text-gray-900">Profile Settings</h2>
@@ -71,7 +70,7 @@ export const SettingsPage: React.FC = () => {
                   alt={user.name}
                   size="xl"
                 />
-                
+
                 <div>
                   <Button variant="outline" size="sm">
                     Change Photo
@@ -81,31 +80,31 @@ export const SettingsPage: React.FC = () => {
                   </p>
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input
                   label="Full Name"
                   defaultValue={user.name}
                 />
-                
+
                 <Input
                   label="Email"
                   type="email"
                   defaultValue={user.email}
                 />
-                
+
                 <Input
                   label="Role"
                   value={user.role}
                   disabled
                 />
-                
+
                 <Input
                   label="Location"
                   defaultValue="San Francisco, CA"
                 />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Bio
@@ -116,15 +115,14 @@ export const SettingsPage: React.FC = () => {
                   defaultValue={user.bio}
                 ></textarea>
               </div>
-              
+
               <div className="flex justify-end gap-3">
                 <Button variant="outline">Cancel</Button>
                 <Button>Save Changes</Button>
               </div>
             </CardBody>
           </Card>
-          
-          {/* Security Settings */}
+
           <Card>
             <CardHeader>
               <h2 className="text-lg font-medium text-gray-900">Security Settings</h2>
@@ -142,7 +140,7 @@ export const SettingsPage: React.FC = () => {
                   <Button variant="outline">Enable</Button>
                 </div>
               </div>
-              
+
               <div className="pt-6 border-t border-gray-200">
                 <h3 className="text-sm font-medium text-gray-900 mb-4">Change Password</h3>
                 <div className="space-y-4">
@@ -150,17 +148,17 @@ export const SettingsPage: React.FC = () => {
                     label="Current Password"
                     type="password"
                   />
-                  
+
                   <Input
                     label="New Password"
                     type="password"
                   />
-                  
+
                   <Input
                     label="Confirm New Password"
                     type="password"
                   />
-                  
+
                   <div className="flex justify-end">
                     <Button>Update Password</Button>
                   </div>

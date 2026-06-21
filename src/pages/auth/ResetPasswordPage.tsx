@@ -11,23 +11,23 @@ export const ResetPasswordPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  
+
   const { resetPassword } = useAuth();
   const token = searchParams.get('token');
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!token) {
       return;
     }
-    
+
     if (password !== confirmPassword) {
       return;
     }
-    
+
     setIsLoading(true);
-    
+
     try {
       await resetPassword(token, password);
       navigate('/login');
@@ -37,7 +37,7 @@ export const ResetPasswordPage: React.FC = () => {
       setIsLoading(false);
     }
   };
-  
+
   if (!token) {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -60,7 +60,7 @@ export const ResetPasswordPage: React.FC = () => {
       </div>
     );
   }
-  
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -73,7 +73,7 @@ export const ResetPasswordPage: React.FC = () => {
             Enter your new password below
           </p>
         </div>
-        
+
         <div className="mt-8 bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <Input
@@ -85,7 +85,7 @@ export const ResetPasswordPage: React.FC = () => {
               fullWidth
               startAdornment={<Lock size={18} />}
             />
-            
+
             <Input
               label="Confirm new password"
               type="password"
@@ -96,7 +96,7 @@ export const ResetPasswordPage: React.FC = () => {
               startAdornment={<Lock size={18} />}
               error={password !== confirmPassword ? 'Passwords do not match' : undefined}
             />
-            
+
             <Button
               type="submit"
               fullWidth

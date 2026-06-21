@@ -51,17 +51,17 @@ const deals = [
 export const DealsPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedStatus, setSelectedStatus] = useState<string[]>([]);
-  
+
   const statuses = ['Due Diligence', 'Term Sheet', 'Negotiation', 'Closed', 'Passed'];
-  
+
   const toggleStatus = (status: string) => {
-    setSelectedStatus(prev => 
+    setSelectedStatus(prev =>
       prev.includes(status)
         ? prev.filter(s => s !== status)
         : [...prev, status]
     );
   };
-  
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'Due Diligence':
@@ -78,7 +78,7 @@ export const DealsPage: React.FC = () => {
         return 'gray';
     }
   };
-  
+
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="flex justify-between items-center">
@@ -86,13 +86,12 @@ export const DealsPage: React.FC = () => {
           <h1 className="text-2xl font-bold text-gray-900">Investment Deals</h1>
           <p className="text-gray-600">Track and manage your investment pipeline</p>
         </div>
-        
+
         <Button>
           Add Deal
         </Button>
       </div>
-      
-      {/* Stats */}
+
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card>
           <CardBody>
@@ -107,7 +106,7 @@ export const DealsPage: React.FC = () => {
             </div>
           </CardBody>
         </Card>
-        
+
         <Card>
           <CardBody>
             <div className="flex items-center">
@@ -121,7 +120,7 @@ export const DealsPage: React.FC = () => {
             </div>
           </CardBody>
         </Card>
-        
+
         <Card>
           <CardBody>
             <div className="flex items-center">
@@ -135,7 +134,7 @@ export const DealsPage: React.FC = () => {
             </div>
           </CardBody>
         </Card>
-        
+
         <Card>
           <CardBody>
             <div className="flex items-center">
@@ -150,8 +149,7 @@ export const DealsPage: React.FC = () => {
           </CardBody>
         </Card>
       </div>
-      
-      {/* Filters */}
+
       <div className="flex flex-col md:flex-row gap-4">
         <div className="w-full md:w-2/3">
           <Input
@@ -162,7 +160,7 @@ export const DealsPage: React.FC = () => {
             fullWidth
           />
         </div>
-        
+
         <div className="w-full md:w-1/3">
           <div className="flex items-center gap-2">
             <Filter size={18} className="text-gray-500" />
@@ -181,8 +179,7 @@ export const DealsPage: React.FC = () => {
           </div>
         </div>
       </div>
-      
-      {/* Deals table */}
+
       <Card>
         <CardHeader>
           <h2 className="text-lg font-medium text-gray-900">Active Deals</h2>

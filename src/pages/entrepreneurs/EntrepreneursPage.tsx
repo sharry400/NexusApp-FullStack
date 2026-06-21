@@ -10,24 +10,21 @@ export const EntrepreneursPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
   const [selectedFundingRange, setSelectedFundingRange] = useState<string[]>([]);
-  
-  // Get unique industries and funding ranges
+
   const allIndustries = Array.from(new Set(entrepreneurs.map(e => e.industry)));
   const fundingRanges = ['< $500K', '$500K - $1M', '$1M - $5M', '> $5M'];
-  
-  // Filter entrepreneurs based on search and filters
+
   const filteredEntrepreneurs = entrepreneurs.filter(entrepreneur => {
-    const matchesSearch = searchQuery === '' || 
+    const matchesSearch = searchQuery === '' ||
       entrepreneur.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       entrepreneur.startupName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       entrepreneur.industry.toLowerCase().includes(searchQuery.toLowerCase()) ||
       entrepreneur.pitchSummary.toLowerCase().includes(searchQuery.toLowerCase());
-    
+
     const matchesIndustry = selectedIndustries.length === 0 ||
       selectedIndustries.includes(entrepreneur.industry);
-    
-    // Simple funding range filter based on the amount string
-    const matchesFunding = selectedFundingRange.length === 0 || 
+
+    const matchesFunding = selectedFundingRange.length === 0 ||
       selectedFundingRange.some(range => {
         const amount = parseInt(entrepreneur.fundingNeeded.replace(/[^0-9]/g, ''));
         switch (range) {
@@ -38,35 +35,35 @@ export const EntrepreneursPage: React.FC = () => {
           default: return true;
         }
       });
-    
+
     return matchesSearch && matchesIndustry && matchesFunding;
   });
-  
+
   const toggleIndustry = (industry: string) => {
-    setSelectedIndustries(prev => 
+    setSelectedIndustries(prev =>
       prev.includes(industry)
         ? prev.filter(i => i !== industry)
         : [...prev, industry]
     );
   };
-  
+
   const toggleFundingRange = (range: string) => {
-    setSelectedFundingRange(prev => 
+    setSelectedFundingRange(prev =>
       prev.includes(range)
         ? prev.filter(r => r !== range)
         : [...prev, range]
     );
   };
-  
+
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Find Startups</h1>
         <p className="text-gray-600">Discover promising startups looking for investment</p>
       </div>
-      
+
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* Filters sidebar */}
+
         <div className="space-y-6">
           <Card>
             <CardHeader>
@@ -91,7 +88,7 @@ export const EntrepreneursPage: React.FC = () => {
                   ))}
                 </div>
               </div>
-              
+
               <div>
                 <h3 className="text-sm font-medium text-gray-900 mb-2">Funding Range</h3>
                 <div className="space-y-2">
@@ -110,7 +107,7 @@ export const EntrepreneursPage: React.FC = () => {
                   ))}
                 </div>
               </div>
-              
+
               <div>
                 <h3 className="text-sm font-medium text-gray-900 mb-2">Location</h3>
                 <div className="space-y-2">
@@ -131,8 +128,7 @@ export const EntrepreneursPage: React.FC = () => {
             </CardBody>
           </Card>
         </div>
-        
-        {/* Main content */}
+
         <div className="lg:col-span-3 space-y-6">
           <div className="flex items-center gap-4">
             <Input
@@ -142,7 +138,7 @@ export const EntrepreneursPage: React.FC = () => {
               startAdornment={<Search size={18} />}
               fullWidth
             />
-            
+
             <div className="flex items-center gap-2">
               <Filter size={18} className="text-gray-500" />
               <span className="text-sm text-gray-600">
@@ -150,7 +146,7 @@ export const EntrepreneursPage: React.FC = () => {
               </span>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {filteredEntrepreneurs.map(entrepreneur => (
               <EntrepreneurCard

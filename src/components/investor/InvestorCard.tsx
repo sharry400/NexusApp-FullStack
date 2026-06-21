@@ -17,19 +17,19 @@ export const InvestorCard: React.FC<InvestorCardProps> = ({
   showActions = true
 }) => {
   const navigate = useNavigate();
-  
+
   const handleViewProfile = () => {
     navigate(`/profile/investor/${investor.id}`);
   };
-  
+
   const handleMessage = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent card click
+    e.stopPropagation();
     navigate(`/chat/${investor.id}`);
   };
-  
+
   return (
-    <Card 
-      hoverable 
+    <Card
+      hoverable
       className="transition-all duration-300 h-full"
       onClick={handleViewProfile}
     >
@@ -42,11 +42,11 @@ export const InvestorCard: React.FC<InvestorCardProps> = ({
             status={investor.isOnline ? 'online' : 'offline'}
             className="mr-4"
           />
-          
+
           <div className="flex-1">
             <h3 className="text-lg font-semibold text-gray-900 mb-1">{investor.name}</h3>
             <p className="text-sm text-gray-500 mb-2">Investor • {investor.totalInvestments} investments</p>
-            
+
             <div className="flex flex-wrap gap-2 mb-3">
               {investor.investmentStage.map((stage, index) => (
                 <Badge key={index} variant="secondary" size="sm">{stage}</Badge>
@@ -54,7 +54,7 @@ export const InvestorCard: React.FC<InvestorCardProps> = ({
             </div>
           </div>
         </div>
-        
+
         <div className="mt-3">
           <h4 className="text-sm font-medium text-gray-900 mb-1">Investment Interests</h4>
           <div className="flex flex-wrap gap-2">
@@ -63,11 +63,11 @@ export const InvestorCard: React.FC<InvestorCardProps> = ({
             ))}
           </div>
         </div>
-        
+
         <div className="mt-4">
           <p className="text-sm text-gray-600 line-clamp-2">{investor.bio}</p>
         </div>
-        
+
         <div className="mt-3 flex justify-between items-center">
           <div>
             <span className="text-xs text-gray-500">Investment Range</span>
@@ -75,7 +75,7 @@ export const InvestorCard: React.FC<InvestorCardProps> = ({
           </div>
         </div>
       </CardBody>
-      
+
       {showActions && (
         <CardFooter className="border-t border-gray-100 bg-gray-50 flex justify-between">
           <Button
@@ -86,7 +86,7 @@ export const InvestorCard: React.FC<InvestorCardProps> = ({
           >
             Message
           </Button>
-          
+
           <Button
             variant="primary"
             size="sm"

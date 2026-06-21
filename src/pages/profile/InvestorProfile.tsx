@@ -12,10 +12,9 @@ import { Investor } from '../../types';
 export const InvestorProfile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { user: currentUser } = useAuth();
-  
-  // Fetch investor data
+
   const investor = findUserById(id || '') as Investor | null;
-  
+
   if (!investor || investor.role !== 'investor') {
     return (
       <div className="text-center py-12">
@@ -27,12 +26,12 @@ export const InvestorProfile: React.FC = () => {
       </div>
     );
   }
-  
+
   const isCurrentUser = currentUser?.id === investor.id;
-  
+
   return (
     <div className="space-y-6 animate-fade-in">
-      {/* Profile header */}
+
       <Card>
         <CardBody className="sm:flex sm:items-start sm:justify-between p-6">
           <div className="sm:flex sm:space-x-6">
@@ -43,14 +42,14 @@ export const InvestorProfile: React.FC = () => {
               status={investor.isOnline ? 'online' : 'offline'}
               className="mx-auto sm:mx-0"
             />
-            
+
             <div className="mt-4 sm:mt-0 text-center sm:text-left">
               <h1 className="text-2xl font-bold text-gray-900">{investor.name}</h1>
               <p className="text-gray-600 flex items-center justify-center sm:justify-start mt-1">
                 <Building2 size={16} className="mr-1" />
                 Investor • {investor.totalInvestments} investments
               </p>
-              
+
               <div className="flex flex-wrap gap-2 justify-center sm:justify-start mt-3">
                 <Badge variant="primary">
                   <MapPin size={14} className="mr-1" />
@@ -62,7 +61,7 @@ export const InvestorProfile: React.FC = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="mt-6 sm:mt-0 flex flex-col sm:flex-row gap-2 justify-center sm:justify-end">
             {!isCurrentUser && (
               <Link to={`/chat/${investor.id}`}>
@@ -73,7 +72,7 @@ export const InvestorProfile: React.FC = () => {
                 </Button>
               </Link>
             )}
-            
+
             {isCurrentUser && (
               <Button
                 variant="outline"
@@ -85,11 +84,11 @@ export const InvestorProfile: React.FC = () => {
           </div>
         </CardBody>
       </Card>
-      
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Main content - left side */}
+
         <div className="lg:col-span-2 space-y-6">
-          {/* About */}
+
           <Card>
             <CardHeader>
               <h2 className="text-lg font-medium text-gray-900">About</h2>
@@ -98,8 +97,7 @@ export const InvestorProfile: React.FC = () => {
               <p className="text-gray-700">{investor.bio}</p>
             </CardBody>
           </Card>
-          
-          {/* Investment Interests */}
+
           <Card>
             <CardHeader>
               <h2 className="text-lg font-medium text-gray-900">Investment Interests</h2>
@@ -114,7 +112,7 @@ export const InvestorProfile: React.FC = () => {
                     ))}
                   </div>
                 </div>
-                
+
                 <div>
                   <h3 className="text-md font-medium text-gray-900">Investment Stages</h3>
                   <div className="flex flex-wrap gap-2 mt-2">
@@ -123,7 +121,7 @@ export const InvestorProfile: React.FC = () => {
                     ))}
                   </div>
                 </div>
-                
+
                 <div>
                   <h3 className="text-md font-medium text-gray-900">Investment Criteria</h3>
                   <ul className="mt-2 space-y-2 text-gray-700">
@@ -148,8 +146,7 @@ export const InvestorProfile: React.FC = () => {
               </div>
             </CardBody>
           </Card>
-          
-          {/* Portfolio Companies */}
+
           <Card>
             <CardHeader className="flex justify-between items-center">
               <h2 className="text-lg font-medium text-gray-900">Portfolio Companies</h2>
@@ -172,10 +169,9 @@ export const InvestorProfile: React.FC = () => {
             </CardBody>
           </Card>
         </div>
-        
-        {/* Sidebar - right side */}
+
         <div className="space-y-6">
-          {/* Investment Details */}
+
           <Card>
             <CardHeader>
               <h2 className="text-lg font-medium text-gray-900">Investment Details</h2>
@@ -188,17 +184,17 @@ export const InvestorProfile: React.FC = () => {
                     {investor.minimumInvestment} - {investor.maximumInvestment}
                   </p>
                 </div>
-                
+
                 <div>
                   <span className="text-sm text-gray-500">Total Investments</span>
                   <p className="text-md font-medium text-gray-900">{investor.totalInvestments} companies</p>
                 </div>
-                
+
                 <div>
                   <span className="text-sm text-gray-500">Typical Investment Timeline</span>
                   <p className="text-md font-medium text-gray-900">3-5 years</p>
                 </div>
-                
+
                 <div className="pt-3 border-t border-gray-100">
                   <span className="text-sm text-gray-500">Investment Focus</span>
                   <div className="mt-2 space-y-2">
@@ -225,8 +221,7 @@ export const InvestorProfile: React.FC = () => {
               </div>
             </CardBody>
           </Card>
-          
-          {/* Stats */}
+
           <Card>
             <CardHeader>
               <h2 className="text-lg font-medium text-gray-900">Investment Stats</h2>
@@ -242,7 +237,7 @@ export const InvestorProfile: React.FC = () => {
                     <BarChart3 size={24} className="text-primary-600" />
                   </div>
                 </div>
-                
+
                 <div className="p-3 border border-gray-200 rounded-md bg-gray-50">
                   <div className="flex justify-between items-center">
                     <div>
@@ -252,7 +247,7 @@ export const InvestorProfile: React.FC = () => {
                     <BarChart3 size={24} className="text-primary-600" />
                   </div>
                 </div>
-                
+
                 <div className="p-3 border border-gray-200 rounded-md bg-gray-50">
                   <div className="flex justify-between items-center">
                     <div>

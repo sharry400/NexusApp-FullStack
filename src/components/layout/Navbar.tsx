@@ -9,26 +9,24 @@ export const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  
+
   const handleLogout = () => {
     logout();
     navigate('/login');
   };
-  
-  // User dashboard route based on role
-  const dashboardRoute = user?.role === 'entrepreneur' 
-    ? '/dashboard/entrepreneur' 
+
+  const dashboardRoute = user?.role === 'entrepreneur'
+    ? '/dashboard/entrepreneur'
     : '/dashboard/investor';
-  
-  // User profile route based on role and ID
-  const profileRoute = user 
-    ? `/profile/${user.role}/${user.id}` 
+
+  const profileRoute = user
+    ? `/profile/${user.role}/${user.id}`
     : '/login';
-  
+
   const navLinks = [
     {
       icon: user?.role === 'entrepreneur' ? <Building2 size={18} /> : <CircleDollarSign size={18} />,
@@ -51,12 +49,12 @@ export const Navbar: React.FC = () => {
       path: profileRoute,
     }
   ];
-  
+
   return (
     <nav className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          {/* Logo and brand */}
+
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-primary-600 rounded-md flex items-center justify-center">
@@ -68,8 +66,7 @@ export const Navbar: React.FC = () => {
               <span className="text-lg font-bold text-gray-900">Business Nexus</span>
             </Link>
           </div>
-          
-          {/* Desktop navigation */}
+
           <div className="hidden md:flex md:items-center md:ml-6">
             {user ? (
               <div className="flex items-center space-x-4">
@@ -83,15 +80,15 @@ export const Navbar: React.FC = () => {
                     {link.text}
                   </Link>
                 ))}
-                
-                <Button 
+
+                <Button
                   variant="ghost"
                   onClick={handleLogout}
                   leftIcon={<LogOut size={18} />}
                 >
                   Logout
                 </Button>
-                
+
                 <Link to={profileRoute} className="flex items-center space-x-2 ml-2">
                   <Avatar
                     src={user.avatarUrl}
@@ -113,8 +110,7 @@ export const Navbar: React.FC = () => {
               </div>
             )}
           </div>
-          
-          {/* Mobile menu button */}
+
           <div className="md:hidden flex items-center">
             <button
               onClick={toggleMenu}
@@ -129,8 +125,7 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
       </div>
-      
-      {/* Mobile menu */}
+
       {isMenuOpen && (
         <div className="md:hidden bg-white border-b border-gray-200 animate-fade-in">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
@@ -148,7 +143,7 @@ export const Navbar: React.FC = () => {
                     <p className="text-xs text-gray-500 capitalize">{user.role}</p>
                   </div>
                 </div>
-                
+
                 <div className="border-t border-gray-200 pt-2">
                   {navLinks.map((link, index) => (
                     <Link
@@ -161,7 +156,7 @@ export const Navbar: React.FC = () => {
                       {link.text}
                     </Link>
                   ))}
-                  
+
                   <button
                     onClick={() => {
                       handleLogout();
@@ -176,15 +171,15 @@ export const Navbar: React.FC = () => {
               </>
             ) : (
               <div className="flex flex-col space-y-2 px-3 py-2">
-                <Link 
-                  to="/login" 
+                <Link
+                  to="/login"
                   className="w-full"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <Button variant="outline" fullWidth>Log in</Button>
                 </Link>
-                <Link 
-                  to="/register" 
+                <Link
+                  to="/register"
                   className="w-full"
                   onClick={() => setIsMenuOpen(false)}
                 >

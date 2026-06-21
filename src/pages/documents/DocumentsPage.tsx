@@ -47,14 +47,14 @@ export const DocumentsPage: React.FC = () => {
           <h1 className="text-2xl font-bold text-gray-900">Documents</h1>
           <p className="text-gray-600">Manage your startup's important files</p>
         </div>
-        
+
         <Button leftIcon={<Upload size={18} />}>
           Upload Document
         </Button>
       </div>
-      
+
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* Storage info */}
+
         <Card className="lg:col-span-1">
           <CardHeader>
             <h2 className="text-lg font-medium text-gray-900">Storage</h2>
@@ -73,7 +73,7 @@ export const DocumentsPage: React.FC = () => {
                 <span className="font-medium text-gray-900">7.5 GB</span>
               </div>
             </div>
-            
+
             <div className="pt-4 border-t border-gray-200">
               <h3 className="text-sm font-medium text-gray-900 mb-2">Quick Access</h3>
               <div className="space-y-2">
@@ -93,8 +93,7 @@ export const DocumentsPage: React.FC = () => {
             </div>
           </CardBody>
         </Card>
-        
-        {/* Document list */}
+
         <div className="lg:col-span-3">
           <Card>
             <CardHeader className="flex justify-between items-center">
@@ -118,7 +117,7 @@ export const DocumentsPage: React.FC = () => {
                     <div className="p-2 bg-primary-50 rounded-lg mr-4">
                       <FileText size={24} className="text-primary-600" />
                     </div>
-                    
+
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <h3 className="text-sm font-medium text-gray-900 truncate">
@@ -128,14 +127,14 @@ export const DocumentsPage: React.FC = () => {
                           <Badge variant="secondary" size="sm">Shared</Badge>
                         )}
                       </div>
-                      
+
                       <div className="flex items-center gap-4 mt-1 text-sm text-gray-500">
                         <span>{doc.type}</span>
                         <span>{doc.size}</span>
                         <span>Modified {doc.lastModified}</span>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center gap-2 ml-4">
                       <Button
                         variant="ghost"
@@ -145,7 +144,7 @@ export const DocumentsPage: React.FC = () => {
                       >
                         <Download size={18} />
                       </Button>
-                      
+
                       <Button
                         variant="ghost"
                         size="sm"
@@ -154,7 +153,7 @@ export const DocumentsPage: React.FC = () => {
                       >
                         <Share2 size={18} />
                       </Button>
-                      
+
                       <Button
                         variant="ghost"
                         size="sm"

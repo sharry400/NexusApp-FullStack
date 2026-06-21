@@ -12,26 +12,25 @@ export const LoginPage: React.FC = () => {
   const [role, setRole] = useState<UserRole>('entrepreneur');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const { login } = useAuth();
   const navigate = useNavigate();
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setIsLoading(true);
-    
+
     try {
       await login(email, password, role);
-      // Redirect based on user role
+
       navigate(role === 'entrepreneur' ? '/dashboard/entrepreneur' : '/dashboard/investor');
     } catch (err) {
       setError((err as Error).message);
       setIsLoading(false);
     }
   };
-  
-  // For demo purposes, pre-filled credentials
+
   const fillDemoCredentials = (userRole: UserRole) => {
     if (userRole === 'entrepreneur') {
       setEmail('sarah@techwave.io');
@@ -42,7 +41,7 @@ export const LoginPage: React.FC = () => {
     }
     setRole(userRole);
   };
-  
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -70,7 +69,7 @@ export const LoginPage: React.FC = () => {
               <span>{error}</span>
             </div>
           )}
-          
+
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -89,7 +88,7 @@ export const LoginPage: React.FC = () => {
                   <Building2 size={18} className="mr-2" />
                   Entrepreneur
                 </button>
-                
+
                 <button
                   type="button"
                   className={`py-3 px-4 border rounded-md flex items-center justify-center transition-colors ${
@@ -104,7 +103,7 @@ export const LoginPage: React.FC = () => {
                 </button>
               </div>
             </div>
-            
+
             <Input
               label="Email address"
               type="email"
@@ -114,7 +113,7 @@ export const LoginPage: React.FC = () => {
               fullWidth
               startAdornment={<User size={18} />}
             />
-            
+
             <Input
               label="Password"
               type="password"
@@ -123,7 +122,7 @@ export const LoginPage: React.FC = () => {
               required
               fullWidth
             />
-            
+
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
@@ -143,7 +142,7 @@ export const LoginPage: React.FC = () => {
                 </a>
               </div>
             </div>
-            
+
             <Button
               type="submit"
               fullWidth
@@ -153,7 +152,7 @@ export const LoginPage: React.FC = () => {
               Sign in
             </Button>
           </form>
-          
+
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
@@ -163,7 +162,7 @@ export const LoginPage: React.FC = () => {
                 <span className="px-2 bg-white text-gray-500">Demo Accounts</span>
               </div>
             </div>
-            
+
             <div className="mt-4 grid grid-cols-2 gap-3">
               <Button
                 variant="outline"
@@ -172,7 +171,7 @@ export const LoginPage: React.FC = () => {
               >
                 Entrepreneur Demo
               </Button>
-              
+
               <Button
                 variant="outline"
                 onClick={() => fillDemoCredentials('investor')}
@@ -182,7 +181,7 @@ export const LoginPage: React.FC = () => {
               </Button>
             </div>
           </div>
-          
+
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
@@ -192,7 +191,7 @@ export const LoginPage: React.FC = () => {
                 <span className="px-2 bg-white text-gray-500">Or</span>
               </div>
             </div>
-            
+
             <div className="mt-2 text-center">
               <p className="text-sm text-gray-600">
                 Don't have an account?{' '}

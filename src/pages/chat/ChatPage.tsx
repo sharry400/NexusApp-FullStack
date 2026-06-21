@@ -19,58 +19,56 @@ export const ChatPage: React.FC = () => {
   const [newMessage, setNewMessage] = useState('');
   const [conversations, setConversations] = useState<any[]>([]);
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
-  
+
   const chatPartner = userId ? findUserById(userId) : null;
-  
+
   useEffect(() => {
-    // Load conversations
+
     if (currentUser) {
       setConversations(getConversationsForUser(currentUser.id));
     }
   }, [currentUser]);
-  
+
   useEffect(() => {
-    // Load messages between users
+
     if (currentUser && userId) {
       setMessages(getMessagesBetweenUsers(currentUser.id, userId));
     }
   }, [currentUser, userId]);
-  
+
   useEffect(() => {
-    // Scroll to bottom of messages
+
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
-  
+
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!newMessage.trim() || !currentUser || !userId) return;
-    
+
     const message = sendMessage({
       senderId: currentUser.id,
       receiverId: userId,
       content: newMessage
     });
-    
+
     setMessages([...messages, message]);
     setNewMessage('');
-    
-    // Update conversations
+
     setConversations(getConversationsForUser(currentUser.id));
   };
-  
+
   if (!currentUser) return null;
-  
+
   return (
     <div className="flex h-[calc(100vh-4rem)] bg-white border border-gray-200 rounded-lg overflow-hidden animate-fade-in">
-      {/* Conversations sidebar */}
+
       <div className="hidden md:block w-1/3 lg:w-1/4 border-r border-gray-200">
         <ChatUserList conversations={conversations} />
       </div>
-      
-      {/* Main chat area */}
+
       <div className="flex-1 flex flex-col">
-        {/* Chat header */}
+
         {chatPartner ? (
           <>
             <div className="border-b border-gray-200 p-4 flex justify-between items-center">
@@ -82,7 +80,7 @@ export const ChatPage: React.FC = () => {
                   status={chatPartner.isOnline ? 'online' : 'offline'}
                   className="mr-3"
                 />
-                
+
                 <div>
                   <h2 className="text-lg font-medium text-gray-900">{chatPartner.name}</h2>
                   <p className="text-sm text-gray-500">
@@ -90,7 +88,7 @@ export const ChatPage: React.FC = () => {
                   </p>
                 </div>
               </div>
-              
+
               <div className="flex space-x-2">
                 <Button
                   variant="ghost"
@@ -100,7 +98,7 @@ export const ChatPage: React.FC = () => {
                 >
                   <Phone size={18} />
                 </Button>
-                
+
                 <Button
                   variant="ghost"
                   size="sm"
@@ -109,7 +107,7 @@ export const ChatPage: React.FC = () => {
                 >
                   <Video size={18} />
                 </Button>
-                
+
                 <Button
                   variant="ghost"
                   size="sm"
@@ -120,8 +118,7 @@ export const ChatPage: React.FC = () => {
                 </Button>
               </div>
             </div>
-            
-            {/* Messages container */}
+
             <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
               {messages.length > 0 ? (
                 <div className="space-y-4">
@@ -144,8 +141,7 @@ export const ChatPage: React.FC = () => {
                 </div>
               )}
             </div>
-            
-            {/* Message input */}
+
             <div className="border-t border-gray-200 p-4">
               <form onSubmit={handleSendMessage} className="flex space-x-2">
                 <Button
@@ -157,7 +153,7 @@ export const ChatPage: React.FC = () => {
                 >
                   <Smile size={20} />
                 </Button>
-                
+
                 <Input
                   type="text"
                   placeholder="Type a message..."
@@ -166,7 +162,7 @@ export const ChatPage: React.FC = () => {
                   fullWidth
                   className="flex-1"
                 />
-                
+
                 <Button
                   type="submit"
                   size="sm"

@@ -11,9 +11,9 @@ interface ChatMessageProps {
 
 export const ChatMessage: React.FC<ChatMessageProps> = ({ message, isCurrentUser }) => {
   const user = findUserById(message.senderId);
-  
+
   if (!user) return null;
-  
+
   return (
     <div
       className={`flex ${isCurrentUser ? 'justify-end' : 'justify-start'} mb-4 animate-fade-in`}
@@ -26,7 +26,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message, isCurrentUser
           className="mr-2 self-end"
         />
       )}
-      
+
       <div className={`flex flex-col ${isCurrentUser ? 'items-end' : 'items-start'}`}>
         <div
           className={`max-w-xs sm:max-w-md px-4 py-2 rounded-lg ${
@@ -37,12 +37,12 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message, isCurrentUser
         >
           <p className="text-sm">{message.content}</p>
         </div>
-        
+
         <span className="text-xs text-gray-500 mt-1">
           {formatDistanceToNow(new Date(message.timestamp), { addSuffix: true })}
         </span>
       </div>
-      
+
       {isCurrentUser && (
         <Avatar
           src={user.avatarUrl}

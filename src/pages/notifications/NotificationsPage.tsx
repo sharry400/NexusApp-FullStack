@@ -54,7 +54,7 @@ export const NotificationsPage: React.FC = () => {
         return <Bell size={16} className="text-gray-600" />;
     }
   };
-  
+
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="flex justify-between items-center">
@@ -62,12 +62,12 @@ export const NotificationsPage: React.FC = () => {
           <h1 className="text-2xl font-bold text-gray-900">Notifications</h1>
           <p className="text-gray-600">Stay updated with your network activity</p>
         </div>
-        
+
         <Button variant="outline" size="sm">
           Mark all as read
         </Button>
       </div>
-      
+
       <div className="space-y-4">
         {notifications.map(notification => (
           <Card
@@ -83,7 +83,7 @@ export const NotificationsPage: React.FC = () => {
                 size="md"
                 className="flex-shrink-0 mr-4"
               />
-              
+
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <span className="font-medium text-gray-900">
@@ -93,11 +93,11 @@ export const NotificationsPage: React.FC = () => {
                     <Badge variant="primary" size="sm" rounded>New</Badge>
                   )}
                 </div>
-                
+
                 <p className="text-gray-600 mt-1">
                   {notification.content}
                 </p>
-                
+
                 <div className="flex items-center gap-2 mt-2 text-sm text-gray-500">
                   {getNotificationIcon(notification.type)}
                   <span>{notification.time}</span>
