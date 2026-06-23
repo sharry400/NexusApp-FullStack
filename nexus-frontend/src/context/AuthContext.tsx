@@ -46,7 +46,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   // 🚀 FIX: _password likha taake TS 'unused variable' ka error na de
-  const login = async (email: string, _password: string, role: UserRole): Promise<void> => {
+  const login = async (email: string, _password: string, role: UserRole): Promise<any> => {
     setIsLoading(true);
 
     try {
