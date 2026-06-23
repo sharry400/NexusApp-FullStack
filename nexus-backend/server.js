@@ -29,7 +29,7 @@ const swaggerOptions = {
       description: 'API Documentation for Business Nexus platform',
     },
     servers: [
-      { url: 'http://localhost:5000' }
+      { url: 'https://nexus-app-full-stack.vercel.app' }
     ]
   },
   apis: ['./routes/*.js']

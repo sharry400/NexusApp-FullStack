@@ -8,7 +8,7 @@ import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 import { formatDistanceToNow } from 'date-fns';
 
-const API = 'http://localhost:5000';
+const API = 'https://nexus-app-full-stack.vercel.app';
 
 export const NotificationsPage: React.FC = () => {
   const { token } = useAuth() as any;

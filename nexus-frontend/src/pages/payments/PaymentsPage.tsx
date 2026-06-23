@@ -7,7 +7,7 @@ import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const API = 'http://localhost:5000';
+const API = 'https://nexus-app-full-stack.vercel.app';
 
 export const PaymentsPage: React.FC = () => {
   const { token, user } = useAuth() as any;

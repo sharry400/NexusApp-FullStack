@@ -42,7 +42,7 @@ export const MeetingsPage: React.FC = () => {
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
-      const meetRes = await axios.get('http://localhost:5000/api/meetings', config);
+      const meetRes = await axios.get('https://nexus-app-full-stack.vercel.app/api/meetings', config);
       const formattedEvents: MeetingEvent[] = meetRes.data.map((meeting: any) => {
         const startDate = new Date(`${meeting.date.split('T')[0]}T${meeting.startTime}:00`);
         const endDate = new Date(`${meeting.date.split('T')[0]}T${meeting.endTime}:00`);
@@ -59,7 +59,7 @@ export const MeetingsPage: React.FC = () => {
 
       const currentRole = (currentUser as any)?.role || 'Investor';
       const targetRole = currentRole.toLowerCase() === 'investor' ? 'Entrepreneur' : 'Investor';
-      const userRes = await axios.get(`http://localhost:5000/api/users?role=${targetRole}`, config);
+      const userRes = await axios.get(`https://nexus-app-full-stack.vercel.app/api/users?role=${targetRole}`, config);
       setUsers(userRes.data);
 
       setIsLoading(false);
@@ -82,7 +82,7 @@ export const MeetingsPage: React.FC = () => {
     setErrorMsg('');
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.post('http://localhost:5000/api/meetings/schedule', formData, config);
+      await axios.post('https://nexus-app-full-stack.vercel.app/api/meetings/schedule', formData, config);
       setShowModal(false);
       setFormData({ receiverId: '', title: '', description: '', date: '', startTime: '', endTime: '' });
       fetchMeetingsAndUsers();
@@ -99,7 +99,7 @@ export const MeetingsPage: React.FC = () => {
   const handleUpdateStatus = async (newStatus: string) => {
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.put(`http://localhost:5000/api/meetings/${selectedEvent?.id}/status`, { status: newStatus }, config);
+      await axios.put(`https://nexus-app-full-stack.vercel.app/api/meetings/${selectedEvent?.id}/status`, { status: newStatus }, config);
 
       setShowEventModal(false);
       fetchMeetingsAndUsers();
@@ -113,7 +113,7 @@ export const MeetingsPage: React.FC = () => {
     if (!window.confirm("Are you sure you want to delete this meeting?")) return;
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.delete(`http://localhost:5000/api/meetings/${selectedEvent?.id}`, config);
+      await axios.delete(`https://nexus-app-full-stack.vercel.app/api/meetings/${selectedEvent?.id}`, config);
       setShowEventModal(false);
       fetchMeetingsAndUsers();
     } catch (error) {

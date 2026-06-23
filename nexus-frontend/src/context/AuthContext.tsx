@@ -26,7 +26,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (storedToken) {
       setToken(storedToken);
       // Fetch latest profile including avatarUrl
-      axios.get('http://localhost:5000/api/auth/me', {
+      axios.get('https://nexus-app-full-stack.vercel.app/api/auth/me', {
         headers: { Authorization: `Bearer ${storedToken}` }
       }).then(response => {
         const backendUser = response.data;
@@ -50,7 +50,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post('https://nexus-app-full-stack.vercel.app/api/auth/login', {
         email,
         password: _password
       });
@@ -92,7 +92,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const verifyOTP = async (email: string, otp: string, role: UserRole) => {
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/verify-otp', {
+      const response = await axios.post('https://nexus-app-full-stack.vercel.app/api/auth/verify-otp', {
         email,
         otp
       });
@@ -130,7 +130,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
+      const response = await axios.post('https://nexus-app-full-stack.vercel.app/api/auth/register', {
         name,
         email,
         password: _password,
@@ -229,7 +229,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
       };
 
-      const response = await axios.put('http://localhost:5000/api/auth/profile', backendPayload, {
+      const response = await axios.put('https://nexus-app-full-stack.vercel.app/api/auth/profile', backendPayload, {
         headers: {
           Authorization: `Bearer ${currentToken}`
         }

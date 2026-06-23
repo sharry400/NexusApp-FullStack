@@ -73,7 +73,7 @@ export const SettingsPage: React.FC = () => {
   const handleToggle2FA = async () => {
     try {
       setToggling2FA(true);
-      const res = await axios.post('http://localhost:5000/api/auth/toggle-2fa', {}, {
+      const res = await axios.post('https://nexus-app-full-stack.vercel.app/api/auth/toggle-2fa', {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setIs2FAEnabled(res.data.twoFactorEnabled);
