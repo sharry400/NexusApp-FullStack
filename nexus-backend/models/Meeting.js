@@ -36,6 +36,10 @@ const meetingSchema = new mongoose.Schema({
     type: String,
     enum: ['Pending', 'Accepted', 'Rejected'],
     default: 'Pending'
+  },
+  meetingLink: {
+    type: String,
+    default: ''
   }
 }, { timestamps: true });
 

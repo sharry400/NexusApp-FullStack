@@ -19,8 +19,23 @@ const userSchema = new mongoose.Schema({
     enum: ['Investor', 'Entrepreneur'],
     required: true
   },
+  walletBalance: {
+    type: Number,
+    default: 0
+  },
+  twoFactorEnabled: {
+    type: Boolean,
+    default: false
+  },
+  twoFactorCode: {
+    type: String
+  },
+  twoFactorExpires: {
+    type: Date
+  },
 
   profile: {
+    avatarUrl: { type: String, default: '' },
     bio: { type: String, default: '' },
     startupName: { type: String, default: '' },
     industry: { type: String, default: '' },
