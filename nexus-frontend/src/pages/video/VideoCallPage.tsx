@@ -6,7 +6,7 @@ import {
   Mic, MicOff, Video, VideoOff, PhoneOff, Copy, CheckCheck, Users
 } from 'lucide-react';
 
-const SOCKET_URL = 'https://nexus-app-full-stack.vercel.app';
+const SOCKET_URL = 'http://localhost:5000';
 const ICE_SERVERS = {
   iceServers: [
     { urls: 'stun:stun.l.google.com:19302' },

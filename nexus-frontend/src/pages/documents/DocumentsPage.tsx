@@ -10,7 +10,7 @@ import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const API = 'https://nexus-app-full-stack.vercel.app';
+const API = 'http://localhost:5000';
 
 const getFileIcon = (mimeType: string) => {
   if (mimeType?.includes('image')) return <FileImage size={24} className="text-blue-500" />;

@@ -9,26 +9,11 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 
 const app = express();
-
-// 🚀 FIX 1: Vercel ke nakhron ke mutabiq Bulletproof CORS
-app.use(cors({
-  origin: ['https://nexus-app-full-stack-hub6.vercel.app', '*'], // Aapki live Vercel website explicitly allow kar di
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
-  credentials: true
-}));
-
-// OPTIONS request (Preflight) ko manually handle karna zaroori hai Vercel par
-app.options('*', cors());
-
+app.use(cors());
 const server = http.createServer(app);
 
 const io = new Server(server, {
-  cors: {
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    credentials: true
-  }
+  cors: { origin: '*', methods: ['GET', 'POST'] }
 });
 
 app.use(express.json({ limit: '10mb' }));
@@ -44,7 +29,7 @@ const swaggerOptions = {
       description: 'API Documentation for Business Nexus platform',
     },
     servers: [
-      { url: 'https://nexus-app-full-stack.vercel.app' }
+      { url: 'http://localhost:5000' }
     ]
   },
   apis: ['./routes/*.js']
@@ -115,17 +100,13 @@ io.on('connection', (socket) => {
   });
 });
 
-// 🚀 FIX 2: Vercel ke liye Database connection alag kar diya
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('✅ MongoDB Connected Successfully'))
-  .catch((err) => console.error('❌ MongoDB Connection Error:', err.message));
-
 const PORT = process.env.PORT || 5000;
-
-// Vercel environment mein app.listen ki jagah module.exports kaam aata hai
-if (process.env.NODE_ENV !== 'production') {
-  server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT} (HTTP + Socket.IO)`));
-}
-
-// 🚀 FIX 3: Yeh sab se zaroori line hai Vercel deployment ke liye!
-module.exports = app;
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log('✅ MongoDB Connected Successfully');
+    server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT} (HTTP + Socket.IO)`));
+  })
+  .catch((err) => {
+    console.error('❌ MongoDB Connection Error:', err.message);
+    process.exit(1);
+  });
